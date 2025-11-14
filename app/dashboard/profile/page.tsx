@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
+import { Textarea } from '@/components/ui/Textarea';
 import { Badge } from '@/components/ui/badge';
 import { Trash2, Plus, ExternalLink } from 'lucide-react';
 
@@ -187,14 +189,14 @@ export default function ProfilePage() {
     <div className="p-6">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Profile</h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
+          <h1 className="text-3xl font-bold text-gray-900">Profile</h1>
+          <p className="mt-2 text-gray-600">
             Manage your professional information
           </p>
         </div>
 
         <Tabs defaultValue="resume" className="w-full">
-          <TabsList className="mb-6 bg-gray-100 dark:bg-gray-800">
+          <TabsList className="mb-6">
             <TabsTrigger value="resume">Resume</TabsTrigger>
             <TabsTrigger value="experience">Experience</TabsTrigger>
             <TabsTrigger value="projects">Projects</TabsTrigger>
@@ -205,13 +207,13 @@ export default function ProfilePage() {
           {/* Resume Tab */}
           <TabsContent value="resume">
             <Card>
-              <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-xl font-semibold text-gray-900">
                 Your Resumes
               </h2>
 
               {/* Add Resume Form */}
-              <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900">
-                <h3 className="mb-4 font-medium text-gray-900 dark:text-white">Add New Resume</h3>
+              <div className="mb-6 rounded-lg border border-blue-100 bg-blue-50 p-5 shadow-sm">
+                <h3 className="mb-4 font-medium text-gray-900">Add New Resume</h3>
                 <div className="grid gap-4 md:grid-cols-3">
                   <Input
                     placeholder="Resume Title"
@@ -223,7 +225,7 @@ export default function ProfilePage() {
                     value={newResume.uploadDate}
                     onChange={(e) => setNewResume({ ...newResume, uploadDate: e.target.value })}
                   />
-                  <Button onClick={addResume} className="gap-2">
+                  <Button onClick={addResume} className="gap-2 font-medium">
                     <Plus className="h-4 w-4" /> Add Resume
                   </Button>
                 </div>
@@ -234,13 +236,13 @@ export default function ProfilePage() {
                 {resumes.map((resume) => (
                   <div
                     key={resume.id}
-                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">
+                      <h4 className="font-medium text-gray-900">
                         {resume.title}
                       </h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-gray-600">
                         Uploaded: {resume.uploadDate}
                       </p>
                     </div>
@@ -248,7 +250,7 @@ export default function ProfilePage() {
                       variant="outline"
                       size="sm"
                       onClick={() => deleteResume(resume.id)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -261,13 +263,13 @@ export default function ProfilePage() {
           {/* Experience Tab */}
           <TabsContent value="experience">
             <Card>
-              <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-xl font-semibold text-gray-900">
                 Work Experience
               </h2>
 
               {/* Add Experience Form */}
-              <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900">
-                <h3 className="mb-4 font-medium text-gray-900 dark:text-white">
+              <div className="mb-6 rounded-lg border border-blue-100 bg-blue-50 p-5 shadow-sm">
+                <h3 className="mb-4 font-medium text-gray-900">
                   Add New Experience
                 </h3>
                 <div className="grid gap-4">
@@ -305,14 +307,15 @@ export default function ProfilePage() {
                       }
                     />
                   </div>
-                  <Input
+                  <Textarea
                     placeholder="Description"
                     value={newExperience.description}
                     onChange={(e) =>
                       setNewExperience({ ...newExperience, description: e.target.value })
                     }
+                    rows={3}
                   />
-                  <Button onClick={addExperience} className="gap-2">
+                  <Button onClick={addExperience} className="gap-2 font-medium">
                     <Plus className="h-4 w-4" /> Add Experience
                   </Button>
                 </div>
@@ -323,18 +326,18 @@ export default function ProfilePage() {
                 {experiences.map((exp) => (
                   <div
                     key={exp.id}
-                    className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+                    className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                        <h4 className="font-semibold text-gray-900">
                           {exp.position}
                         </h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{exp.company}</p>
-                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                        <p className="text-sm text-gray-700">{exp.company}</p>
+                        <p className="mt-1 text-xs text-gray-600">
                           {exp.startDate} - {exp.endDate}
                         </p>
-                        <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
+                        <p className="mt-2 text-sm text-gray-700">
                           {exp.description}
                         </p>
                       </div>
@@ -342,7 +345,7 @@ export default function ProfilePage() {
                         variant="outline"
                         size="sm"
                         onClick={() => deleteExperience(exp.id)}
-                        className="text-red-600 hover:text-red-700"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -356,25 +359,26 @@ export default function ProfilePage() {
           {/* Projects Tab */}
           <TabsContent value="projects">
             <Card>
-              <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-xl font-semibold text-gray-900">
                 Projects
               </h2>
 
               {/* Add Project Form */}
-              <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900">
-                <h3 className="mb-4 font-medium text-gray-900 dark:text-white">Add New Project</h3>
+              <div className="mb-6 rounded-lg border border-blue-100 bg-blue-50 p-5 shadow-sm">
+                <h3 className="mb-4 font-medium text-gray-900">Add New Project</h3>
                 <div className="grid gap-4">
                   <Input
                     placeholder="Project Name"
                     value={newProject.name}
                     onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
                   />
-                  <Input
+                  <Textarea
                     placeholder="Description"
                     value={newProject.description}
                     onChange={(e) =>
                       setNewProject({ ...newProject, description: e.target.value })
                     }
+                    rows={3}
                   />
                   <Input
                     placeholder="Technologies (comma-separated)"
@@ -388,7 +392,7 @@ export default function ProfilePage() {
                     value={newProject.url}
                     onChange={(e) => setNewProject({ ...newProject, url: e.target.value })}
                   />
-                  <Button onClick={addProject} className="gap-2">
+                  <Button onClick={addProject} className="gap-2 font-medium">
                     <Plus className="h-4 w-4" /> Add Project
                   </Button>
                 </div>
@@ -399,27 +403,27 @@ export default function ProfilePage() {
                 {projects.map((project) => (
                   <div
                     key={project.id}
-                    className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+                    className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="mb-3 flex items-start justify-between">
-                      <h4 className="font-semibold text-gray-900 dark:text-white">
+                      <h4 className="font-semibold text-gray-900">
                         {project.name}
                       </h4>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => deleteProject(project.id)}
-                        className="text-red-600 hover:text-red-700"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
-                    <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">
+                    <p className="mb-3 text-sm text-gray-700">
                       {project.description}
                     </p>
                     <div className="mb-3 flex flex-wrap gap-2">
                       {project.technologies.map((tech, idx) => (
-                        <Badge key={idx} variant="secondary">
+                        <Badge key={idx} variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200">
                           {tech}
                         </Badge>
                       ))}
@@ -429,7 +433,7 @@ export default function ProfilePage() {
                         href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
                       >
                         <ExternalLink className="h-3 w-3" />
                         View Project
@@ -444,13 +448,13 @@ export default function ProfilePage() {
           {/* External Links Tab */}
           <TabsContent value="links">
             <Card>
-              <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-xl font-semibold text-gray-900">
                 External Links
               </h2>
 
               {/* Add Link Form */}
-              <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900">
-                <h3 className="mb-4 font-medium text-gray-900 dark:text-white">Add New Link</h3>
+              <div className="mb-6 rounded-lg border border-blue-100 bg-blue-50 p-5 shadow-sm">
+                <h3 className="mb-4 font-medium text-gray-900">Add New Link</h3>
                 <div className="grid gap-4 md:grid-cols-3">
                   <Input
                     placeholder="Platform (e.g., GitHub)"
@@ -462,7 +466,7 @@ export default function ProfilePage() {
                     value={newLink.url}
                     onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
                   />
-                  <Button onClick={addLink} className="gap-2">
+                  <Button onClick={addLink} className="gap-2 font-medium">
                     <Plus className="h-4 w-4" /> Add Link
                   </Button>
                 </div>
@@ -473,17 +477,17 @@ export default function ProfilePage() {
                 {links.map((link) => (
                   <div
                     key={link.id}
-                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="flex-1">
-                      <h4 className="font-medium text-gray-900 dark:text-white">
+                      <h4 className="font-medium text-gray-900">
                         {link.platform}
                       </h4>
                       <a
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
                       >
                         <ExternalLink className="h-3 w-3" />
                         {link.url}
@@ -493,7 +497,7 @@ export default function ProfilePage() {
                       variant="outline"
                       size="sm"
                       onClick={() => deleteLink(link.id)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
@@ -506,30 +510,31 @@ export default function ProfilePage() {
           {/* Skills Tab */}
           <TabsContent value="skills">
             <Card>
-              <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="mb-6 text-xl font-semibold text-gray-900">
                 Skill Sets
               </h2>
 
               {/* Add Skill Form */}
-              <div className="mb-6 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900">
-                <h3 className="mb-4 font-medium text-gray-900 dark:text-white">Add New Skill</h3>
+              <div className="mb-6 rounded-lg border border-blue-100 bg-blue-50 p-5 shadow-sm">
+                <h3 className="mb-4 font-medium text-gray-900">Add New Skill</h3>
                 <div className="grid gap-4 md:grid-cols-3">
                   <Input
                     placeholder="Skill Name"
                     value={newSkill.name}
                     onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })}
                   />
-                  <select
-                    className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                  <Select
                     value={newSkill.level}
                     onChange={(e) => setNewSkill({ ...newSkill, level: e.target.value })}
-                  >
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                    <option value="Expert">Expert</option>
-                  </select>
-                  <Button onClick={addSkill} className="gap-2">
+                    options={[
+                      { value: 'Beginner', label: 'Beginner' },
+                      { value: 'Intermediate', label: 'Intermediate' },
+                      { value: 'Advanced', label: 'Advanced' },
+                      { value: 'Expert', label: 'Expert' }
+                    ]}
+                    placeholder="Select skill level"
+                  />
+                  <Button onClick={addSkill} className="gap-2 font-medium">
                     <Plus className="h-4 w-4" /> Add Skill
                   </Button>
                 </div>
@@ -540,11 +545,11 @@ export default function ProfilePage() {
                 {skills.map((skill) => (
                   <div
                     key={skill.id}
-                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">{skill.name}</h4>
-                      <Badge variant="secondary" className="mt-1">
+                      <h4 className="font-medium text-gray-900">{skill.name}</h4>
+                      <Badge variant="secondary" className="mt-1 bg-blue-100 text-blue-700 hover:bg-blue-200">
                         {skill.level}
                       </Badge>
                     </div>
@@ -552,7 +557,7 @@ export default function ProfilePage() {
                       variant="outline"
                       size="sm"
                       onClick={() => deleteSkill(skill.id)}
-                      className="text-red-600 hover:text-red-700"
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>

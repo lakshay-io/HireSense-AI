@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Alert } from '@/components/ui/Alert';
@@ -138,9 +139,8 @@ export default function LoginPage() {
               autoComplete="email"
             />
 
-            <Input
+            <PasswordInput
               label="Password"
-              type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}

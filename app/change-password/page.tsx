@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import ServiceFactory from '@/services/ServiceFactory';
-import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Alert } from '@/components/ui/Alert';
@@ -166,9 +166,8 @@ export default function ChangePasswordPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
+            <PasswordInput
               label="Current Password"
-              type="password"
               name="oldPassword"
               value={formData.oldPassword}
               onChange={handleChange}
@@ -177,9 +176,8 @@ export default function ChangePasswordPage() {
               autoComplete="current-password"
             />
 
-            <Input
+            <PasswordInput
               label="New Password"
-              type="password"
               name="newPassword"
               value={formData.newPassword}
               onChange={handleChange}
@@ -188,9 +186,8 @@ export default function ChangePasswordPage() {
               autoComplete="new-password"
             />
 
-            <Input
+            <PasswordInput
               label="Confirm New Password"
-              type="password"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}

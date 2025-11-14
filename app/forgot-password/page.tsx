@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ServiceFactory from '@/services/ServiceFactory';
 import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Alert } from '@/components/ui/Alert';
@@ -179,9 +180,8 @@ export default function ForgotPasswordPage() {
             </form>
           ) : (
             <form onSubmit={handlePasswordSubmit} className="space-y-4">
-              <Input
+              <PasswordInput
                 label="New Password"
-                type="password"
                 name="newPassword"
                 value={newPassword}
                 onChange={(e) => {
@@ -193,9 +193,8 @@ export default function ForgotPasswordPage() {
                 autoComplete="new-password"
               />
 
-              <Input
+              <PasswordInput
                 label="Confirm New Password"
-                type="password"
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => {
